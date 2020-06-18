@@ -1,6 +1,8 @@
 import { BaseController } from './BaseController'
 import { Request, Response, Next } from 'restify'
-import { IMonitoredEndpointRepo } from '../daos/repos/mysql/monitoredEndpointMysqlRepo'
+import { monitoredEndpointImpl } from '../daos'
+const { IMonitoredEndpointRepo } = monitoredEndpointImpl
+type IMonitoredEndpointRepo = typeof IMonitoredEndpointRepo
 
 export class GetMonitoredEndpointByIDController extends BaseController {
     private monitoredEndpointRepo: IMonitoredEndpointRepo

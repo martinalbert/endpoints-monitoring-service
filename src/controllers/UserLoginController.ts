@@ -1,6 +1,8 @@
-import BaseController from './BaseController'
+import { BaseController } from './BaseController'
 import { Request, Response, Next } from 'restify'
-import IUserRepo from '../daos/repos/mysql/userMysqlRepo'
+import { userImpl } from '../daos'
+const { IUserRepo } = userImpl
+type IUserRepo = typeof IUserRepo
 
 export class UserLoginController extends BaseController {
     private userRepo: IUserRepo
