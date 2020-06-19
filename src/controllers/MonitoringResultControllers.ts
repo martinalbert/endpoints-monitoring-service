@@ -1,7 +1,6 @@
 import { BaseController } from './BaseController'
 import { Request, Response, Next } from 'restify'
-import { monitoringResultImpl } from '../daos'
-const { IMonitoringResultRepo } = monitoringResultImpl
+import { IMonitoringResultRepo } from '../daos'
 type IMonitoringResultRepo = typeof IMonitoringResultRepo
 
 export class GetMonitoringResultByIDController extends BaseController {
@@ -12,13 +11,17 @@ export class GetMonitoringResultByIDController extends BaseController {
         this.monitoringResultRepo = monitoringResultRepo
     }
 
-    protected async executeImpl(req: Request, res: Response): Promise<void | any> {
+    protected async executeImpl(
+        req: Request,
+        res: Response,
+        next: Next
+    ): Promise<void | any> {
         try {
             // handle request
             console.log('getting monitoring result')
             res.send(200, 'db response')
         } catch (err) {
-            return this.fail(res, err.toString())
+            return this.fail(next, err.toString())
         }
     }
 }
@@ -31,13 +34,17 @@ export class GetAllMonitoringResultsController extends BaseController {
         this.monitoringResultRepo = monitoringResultRepo
     }
 
-    protected async executeImpl(req: Request, res: Response): Promise<void | any> {
+    protected async executeImpl(
+        req: Request,
+        res: Response,
+        next: Next
+    ): Promise<void | any> {
         try {
             // handle request
             console.log('getting all monitoring Results')
             res.send(200, 'db response')
         } catch (err) {
-            return this.fail(res, err.toString())
+            return this.fail(next, err.toString())
         }
     }
 }
@@ -50,7 +57,11 @@ export class CreateMonitoringResultController extends BaseController {
         this.monitoringResultRepo = monitoringResultRepo
     }
 
-    protected async executeImpl(req: Request, res: Response): Promise<void | any> {
+    protected async executeImpl(
+        req: Request,
+        res: Response,
+        next: Next
+    ): Promise<void | any> {
         try {
             // handle request
             console.log('creating new monitoring Result')
@@ -58,7 +69,7 @@ export class CreateMonitoringResultController extends BaseController {
 
             // save record
         } catch (err) {
-            return this.fail(res, err.toString())
+            return this.fail(next, err.toString())
         }
     }
 }
@@ -71,7 +82,11 @@ export class UpdateMonitoringResultController extends BaseController {
         this.monitoringResultRepo = monitoringResultRepo
     }
 
-    protected async executeImpl(req: Request, res: Response): Promise<void | any> {
+    protected async executeImpl(
+        req: Request,
+        res: Response,
+        next: Next
+    ): Promise<void | any> {
         try {
             // handle request
             console.log('Updating new monitoring Result')
@@ -79,7 +94,7 @@ export class UpdateMonitoringResultController extends BaseController {
 
             // save record
         } catch (err) {
-            return this.fail(res, err.toString())
+            return this.fail(next, err.toString())
         }
     }
 }
@@ -92,7 +107,11 @@ export class DeleteMonitoringResultController extends BaseController {
         this.monitoringResultRepo = monitoringResultRepo
     }
 
-    protected async executeImpl(req: Request, res: Response): Promise<void | any> {
+    protected async executeImpl(
+        req: Request,
+        res: Response,
+        next: Next
+    ): Promise<void | any> {
         try {
             // handle request
             console.log('Deleting new monitoring Result')
@@ -100,7 +119,7 @@ export class DeleteMonitoringResultController extends BaseController {
 
             // save record
         } catch (err) {
-            return this.fail(res, err.toString())
+            return this.fail(next, err.toString())
         }
     }
 }
