@@ -7,3 +7,6 @@ export const MonitoringResultRepo = loader.loadRepo('monitoringResult')
 export const IUserRepo = loader.loadInterface('User')
 export const IMonitoredEndpointRepo = loader.loadInterface('MonitoredEndpoint')
 export const IMonitoringResultRepo = loader.loadInterface('MonitoringResult')
+
+export const { mysql } = loader.loadClient()
+export const { connect } = loader.loadClient()

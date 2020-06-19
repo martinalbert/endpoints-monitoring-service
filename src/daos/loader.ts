@@ -20,7 +20,13 @@ const loadInterface = (abstraction: string) => {
     return require(`./repos/I${abstraction}Repo`).default
 }
 
+const loadClient = () => {
+    const currentDatabase = config.CURRENT_DATABASE
+    return require(`./repos/${currentDatabase}/${currentDatabase}Client`)
+}
+
 export default {
     loadRepo,
     loadInterface,
+    loadClient,
 }
