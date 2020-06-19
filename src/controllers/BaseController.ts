@@ -1,22 +1,21 @@
-import { Request, Response } from 'restify'
+import { Request, Response, Next } from 'restify'
 import errors from 'restify-errors'
 
 export abstract class BaseController {
-    protected abstract executeImpl(req: Request, res: Response): Promise<void | any>
+    protected abstract executeImpl(
+        req: Request,
+        res: Response,
+        next: Next
+    ): Promise<void | any>
 
-    public async exec(req: Request, res: Response): Promise<void | any> {
+    public async exec(req: Request, res: Response, next: Next): Promise<void | any> {
         try {
-            await this.executeImpl(req, res)
+            await this.executeImpl(req, res, next)
         } catch (err) {
             console.log(`[BaseController]: Uncaught controller error`)
             console.log(err)
-            this.fail(res, 'An unexpected error occured')
+            this.fail(next, 'An unexpected error occured')
         }
-    }
-
-    public static jsonResponse(res: Response, code: number, message: string) {
-        res.statusCode = code
-        return res.json({ message })
     }
 
     public ok<T>(res: Response, dto?: T) {
@@ -33,51 +32,66 @@ export abstract class BaseController {
         return res.send(201)
     }
 
-    public clientError(res: Response, message?: string) {
-        return BaseController.jsonResponse(res, 400, message ? message : 'Unauthorized')
+    // 4XX
+    public clientError(next: Next, message?: string) {
+        return next(new errors.BadRequestError(message ? message : 'Bad Request Error'))
     }
 
-    public unauthorized(res: Response, message?: string) {
-        return BaseController.jsonResponse(res, 401, message ? message : 'Unauthorized')
+    public unauthorized(next: Next, message?: string) {
+        return next(new errors.UnauthorizedError(message ? message : 'Unauthorized'))
     }
 
-    public paymentRequired(res: Response, message?: string) {
-        return BaseController.jsonResponse(
-            res,
-            402,
-            message ? message : 'Payment required'
+    public paymentRequired(next: Next, message?: string) {
+        return next(
+            new errors.PaymentRequiredError(message ? message : 'Payment required')
         )
     }
 
-    public forbidden(res: Response, message?: string) {
-        return BaseController.jsonResponse(res, 403, message ? message : 'Forbidden')
+    public forbidden(next: Next, message?: string) {
+        return next(new errors.ForbiddenError(message ? message : 'Forbidden'))
     }
 
-    public notFound(res: Response, message?: string) {
-        return BaseController.jsonResponse(res, 404, message ? message : 'Not found')
+    public notFound(next: Next, message?: string) {
+        return next(new errors.NotFoundError(message ? message : 'Not found'))
     }
 
-    public conflict(res: Response, message?: string) {
-        return BaseController.jsonResponse(res, 409, message ? message : 'Conflict')
+    public conflict(next: Next, message?: string) {
+        return next(new errors.ConflictError(message ? message : 'Conflict'))
     }
 
-    public tooMany(res: Response, message?: string) {
-        return BaseController.jsonResponse(
-            res,
-            429,
-            message ? message : 'Too many requests'
+    public tooMany(next: Next, message?: string) {
+        return next(
+            new errors.TooManyRequestsError(message ? message : 'Too many requests')
         )
     }
 
-    public todo(res: Response) {
-        return BaseController.jsonResponse(res, 400, 'TODO')
+    public requestExpired(next: Next, message?: string) {
+        return next(
+            new errors.RequestExpiredError(message ? message : 'Request expired error')
+        )
     }
 
-    public fail(res: Response, error: Error | string) {
+    // 50X
+    public notImplemented(next: Next, message?: string) {
+        return next(
+            new errors.NotImplementedError(message ? message : 'Not implemented error')
+        )
+    }
+
+    public badGateway(next: Next, message?: string) {
+        return next(new errors.BadGatewayError(message ? message : 'Bad gateway error'))
+    }
+
+    public serviceUnavailable(next: Next, message?: string) {
+        return next(
+            new errors.ServiceUnavailableError(
+                message ? message : 'Service unavailable error'
+            )
+        )
+    }
+
+    public fail(next: Next, error: Error | string) {
         console.log(error)
-        res.statusCode = 500
-        return res.json({
-            message: error.toString(),
-        })
+        return next(new errors.InternalServerError(error))
     }
 }
