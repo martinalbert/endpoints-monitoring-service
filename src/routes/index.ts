@@ -9,9 +9,20 @@ import {
 
 export default (server: Server) => {
     console.log('setting up routes')
-    server.get('/endpoints', (req, res) => getAllMonitoredEndpoints.exec(req, res))
-    server.get('/endpoints/:ID', (req, res) => getMonitoredEndpointByID.exec(req, res))
-    server.post('/endpoints', (req, res) => createMonitoredEndpoint.exec(req, res))
-    server.patch('/endpoints/:ID', (req, res) => updateMonitoredEndpoint.exec(req, res))
-    server.del('/endpoints/:ID', (req, res) => deleteMonitoredEndpoint.exec(req, res))
+
+    server.get('/endpoints', async (req, res, next) =>
+        getAllMonitoredEndpoints.exec(req, res, next)
+    )
+    server.get('/endpoints/:ID', async (req, res, next) =>
+        getMonitoredEndpointByID.exec(req, res, next)
+    )
+    server.post('/endpoints', async (req, res, next) =>
+        createMonitoredEndpoint.exec(req, res, next)
+    )
+    server.patch('/endpoints/:ID', async (req, res, next) =>
+        updateMonitoredEndpoint.exec(req, res, next)
+    )
+    server.del('/endpoints/:ID', async (req, res, next) =>
+        deleteMonitoredEndpoint.exec(req, res, next)
+    )
 }
