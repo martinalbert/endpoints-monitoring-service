@@ -1,12 +1,14 @@
 import restify from 'restify'
+import morgan from 'morgan'
 import routes from './routes'
 
-const app = restify.createServer()
+const server = restify.createServer()
 
 // Middlewares
-app.use(restify.plugins.bodyParser())
+server.use(restify.plugins.bodyParser())
+server.use(morgan('dev'))
 
 // Routes Handlers
-routes(app)
+routes(server)
 
-export default app
+export default server
