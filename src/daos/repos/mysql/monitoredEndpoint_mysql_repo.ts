@@ -23,7 +23,6 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
         const endpoints = await MonitoredEndpointModel.findAll({
             where: { owner: uID },
         })
-        console.log(endpoints.dataValues)
 
         if (endpoints) return endpoints
 

@@ -21,7 +21,6 @@ export default class MonitoringResultRepo extends IMonitoringResultRepo {
         const results = await MonitoringResultModel.findAll({
             where: { monitoredEndpoint: endpoint.id },
         })
-        console.log(results.dataValues)
 
         if (results) return results
 
@@ -33,7 +32,6 @@ export default class MonitoringResultRepo extends IMonitoringResultRepo {
             where: { monitoredEndpoint: endpoint.id },
             limit: 10,
         })
-        console.log(results.dataValues)
 
         if (results) return results
 
