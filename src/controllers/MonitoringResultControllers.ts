@@ -1,125 +1,136 @@
 import { BaseController } from './BaseController'
 import { Request, Response, Next } from 'restify'
-import { IMonitoringResultRepo } from '../daos'
-type IMonitoringResultRepo = typeof IMonitoringResultRepo
+import IMonitoringResultRepo from '../daos/repos/IMonitoringResultRepo'
+import IMonitoredEndpointRepo from '../daos/repos/IMonitoredEndpointRepo'
+import MonitoringResult from '../entities/MonitoringResult'
 
 export class GetMonitoringResultByIDController extends BaseController {
-    private monitoringResultRepo: IMonitoringResultRepo
+    private repo: IMonitoringResultRepo
+    private endpointRepo: IMonitoredEndpointRepo
 
-    constructor(monitoringResultRepo: IMonitoringResultRepo) {
+    constructor(
+        monitoringResultRepo: IMonitoringResultRepo,
+        monitoredEndpointRepo: IMonitoredEndpointRepo
+    ) {
         super()
-        this.monitoringResultRepo = monitoringResultRepo
+        this.repo = monitoringResultRepo
+        this.endpointRepo = monitoredEndpointRepo
     }
 
-    protected async executeImpl(
-        req: Request,
-        res: Response,
-        next: Next
-    ): Promise<void | any> {
+    protected async executeImpl(req: Request, res: Response, next: Next): Promise<void | any> {
         try {
             // handle request
-            console.log('getting monitoring result')
-            res.send(200, 'db response')
+            console.log('getting monitoring result npmby ID')
+            const endpointID = req.params.eID
+            const endpoint = await this.endpointRepo.getByID(endpointID, req.user.id)
+            const result = await this.repo.getByID(req.params.id, endpoint)
+
+            this.ok<MonitoringResult>(res, result)
+            next()
         } catch (err) {
-            return this.fail(next, err.toString())
+            return this.resourceNotFound(next, err)
         }
     }
 }
 
 export class GetAllMonitoringResultsController extends BaseController {
-    private monitoringResultRepo: IMonitoringResultRepo
+    private repo: IMonitoringResultRepo
+    private endpointRepo: IMonitoredEndpointRepo
 
-    constructor(monitoringResultRepo: IMonitoringResultRepo) {
+    constructor(
+        monitoringResultRepo: IMonitoringResultRepo,
+        monitoredEndpointRepo: IMonitoredEndpointRepo
+    ) {
         super()
-        this.monitoringResultRepo = monitoringResultRepo
+        this.repo = monitoringResultRepo
+        this.endpointRepo = monitoredEndpointRepo
     }
 
-    protected async executeImpl(
-        req: Request,
-        res: Response,
-        next: Next
-    ): Promise<void | any> {
+    protected async executeImpl(req: Request, res: Response, next: Next): Promise<void | any> {
         try {
             // handle request
-            console.log('getting all monitoring Results')
-            res.send(200, 'db response')
+            console.log('getting all monitoring results')
+            const endpointID = req.params.eID
+            const endpoint = await this.endpointRepo.getByID(endpointID, req.user.id)
+            const results = await this.repo.getLast10(endpoint)
+
+            this.ok<MonitoringResult[]>(res, results)
+            next()
         } catch (err) {
-            return this.fail(next, err.toString())
+            return this.resourceNotFound(next, err)
         }
     }
 }
 
 export class CreateMonitoringResultController extends BaseController {
-    private monitoringResultRepo: IMonitoringResultRepo
+    private repo: IMonitoringResultRepo
+    private endpointRepo: IMonitoredEndpointRepo
 
-    constructor(monitoringResultRepo: IMonitoringResultRepo) {
+    constructor(
+        monitoringResultRepo: IMonitoringResultRepo,
+        monitoredEndpointRepo: IMonitoredEndpointRepo
+    ) {
         super()
-        this.monitoringResultRepo = monitoringResultRepo
+        this.repo = monitoringResultRepo
+        this.endpointRepo = monitoredEndpointRepo
     }
 
-    protected async executeImpl(
-        req: Request,
-        res: Response,
-        next: Next
-    ): Promise<void | any> {
+    protected async executeImpl(req: Request, res: Response, next: Next): Promise<void | any> {
         try {
+            // check for JSON
+            if (!req.is('application/json')) return this.invalidContent(next)
+
             // handle request
-            console.log('creating new monitoring Result')
-            res.send(200, 'db response')
+            // create an ID, create dateOfCreation, create dateOfLastCheck
+            const dateOfCheck = new Date()
+            const { httpCode, httpPayload } = req.body
+            const endpointID = req.params.eID
+            const monitoredEndpoint = await this.endpointRepo.getByID(endpointID, req.user.id)
+            const monitoringResult = new MonitoringResult(
+                0,
+                dateOfCheck,
+                httpCode,
+                httpPayload,
+                monitoredEndpoint
+            )
 
             // save record
+            console.log('creating new monitored endpoint')
+            const newResult = await this.repo.create(monitoringResult)
+
+            this.created(res)
+            next()
         } catch (err) {
-            return this.fail(next, err.toString())
-        }
-    }
-}
-
-export class UpdateMonitoringResultController extends BaseController {
-    private monitoringResultRepo: IMonitoringResultRepo
-
-    constructor(monitoringResultRepo: IMonitoringResultRepo) {
-        super()
-        this.monitoringResultRepo = monitoringResultRepo
-    }
-
-    protected async executeImpl(
-        req: Request,
-        res: Response,
-        next: Next
-    ): Promise<void | any> {
-        try {
-            // handle request
-            console.log('Updating new monitoring Result')
-            res.send(200, 'db response')
-
-            // save record
-        } catch (err) {
-            return this.fail(next, err.toString())
+            return this.fail(next, err)
         }
     }
 }
 
 export class DeleteMonitoringResultController extends BaseController {
-    private monitoringResultRepo: IMonitoringResultRepo
+    private repo: IMonitoringResultRepo
+    private endpointRepo: IMonitoredEndpointRepo
 
-    constructor(monitoringResultRepo: IMonitoringResultRepo) {
+    constructor(
+        monitoringResultRepo: IMonitoringResultRepo,
+        monitoredEndpointRepo: IMonitoredEndpointRepo
+    ) {
         super()
-        this.monitoringResultRepo = monitoringResultRepo
+        this.repo = monitoringResultRepo
+        this.endpointRepo = monitoredEndpointRepo
     }
 
-    protected async executeImpl(
-        req: Request,
-        res: Response,
-        next: Next
-    ): Promise<void | any> {
+    protected async executeImpl(req: Request, res: Response, next: Next): Promise<void | any> {
         try {
-            // handle request
-            console.log('Deleting new monitoring Result')
-            res.send(200, 'db response')
+            // delete record
+            console.log('Deleting monitored endpoint')
+            const endpointID = req.params.eID
+            const endpoint = await this.endpointRepo.getByID(endpointID, req.user.id)
+            const deleted = await this.repo.delete(req.params.id, endpoint)
 
-            // save record
+            this.ok<Boolean>(res, deleted)
+            next()
         } catch (err) {
-            return this.fail(next, err.toString())
+            return this.resourceNotFound(next, err)
         }
     }
 }
