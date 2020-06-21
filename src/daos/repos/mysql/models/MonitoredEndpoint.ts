@@ -7,16 +7,14 @@ MonitoredEndpointModel.init(
     {
         id: {
             type: Sequelize.INTEGER,
+            primaryKey: true,
+            unique: true,
             allowNull: false,
             autoIncrement: true,
-            primaryKey: true,
         },
         name: {
             type: Sequelize.STRING,
             allowNull: false,
-            validate: {
-                isAlpha: true,
-            },
         },
         url: {
             type: Sequelize.STRING,

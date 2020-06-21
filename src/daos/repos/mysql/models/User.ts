@@ -13,9 +13,10 @@ UserModel.init(
     {
         id: {
             type: Sequelize.INTEGER,
+            primaryKey: true,
+            unique: true,
             allowNull: false,
             autoIncrement: true,
-            primaryKey: true,
         },
         userName: {
             type: Sequelize.STRING,
