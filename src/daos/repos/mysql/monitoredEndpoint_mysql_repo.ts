@@ -1,54 +1,90 @@
 import IMonitoredEndpointRepo from '../IMonitoredEndpointRepo'
+import MonitoredEndpointModel from './models/MonitoredEndpoint'
+import MonitoringResultModel from './models/MonitoringResult'
 import MonitoredEndpoint from '../../../entities/MonitoredEndpoint'
-import User from '../../../entities/User'
 
 export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
-    getByID(id: Number): MonitoredEndpoint {
-        const owner = new User(1, 'Martin', 'martin@martin.com', 'salt')
-        return new MonitoredEndpoint(
-            id,
-            'one',
-            'http:/lorem.com/',
-            new Date(),
-            new Date(),
-            10,
-            owner
-        )
+    async getByID(id: number, uID: number): Promise<MonitoredEndpoint> {
+        // make sure the owner is right
+        const endpoint = await MonitoredEndpointModel.findOne({
+            where: { id: id, owner: uID },
+        })
+        if (!endpoint) {
+            throw new Error('This User doesnt have access to this endpoint')
+        }
+        console.log(endpoint.dataValues)
+
+        if (endpoint) return endpoint
+
+        throw new Error(`There is no monitored endpoint with id: ${id} for this User.`)
     }
 
-    getAll(): MonitoredEndpoint[] {
-        const owner = new User(1, 'Martin', 'martin@martin.com', 'salt')
-        return [
-            new MonitoredEndpoint(
-                1,
-                'one',
-                'http:/lorem.com/',
-                new Date(),
-                new Date(),
-                10,
-                owner
-            ),
-            new MonitoredEndpoint(
-                2,
-                'two',
-                'http:/lorem.com/',
-                new Date(),
-                new Date(),
-                10,
-                owner
-            ),
-        ]
+    async getAll(uID: number): Promise<MonitoredEndpoint[]> {
+        const endpoints = await MonitoredEndpointModel.findAll({
+            where: { owner: uID },
+        })
+        console.log(endpoints.dataValues)
+
+        if (endpoints) return endpoints
+
+        throw new Error('There are no monitored endpoints for this User')
     }
 
-    create(monitoredEndpoint: MonitoredEndpoint): MonitoredEndpoint {
-        return monitoredEndpoint
+    async create(monitoredEndpoint: MonitoredEndpoint): Promise<MonitoredEndpoint> {
+        const newEndpoint = await MonitoredEndpointModel.create(monitoredEndpoint.toObject())
+        console.log(newEndpoint.dataValues)
+
+        if (newEndpoint) return newEndpoint
+
+        throw new Error('Creating new endpoint failed.')
     }
 
-    update(monitoredEndpoint: MonitoredEndpoint): Boolean {
-        return false
+    async update(id: number, monitoredEndpoint: MonitoredEndpoint): Promise<boolean> {
+        const endpoint = await MonitoredEndpointModel.findOne({
+            where: { id: id, owner: monitoredEndpoint.owner.id },
+        })
+
+        if (endpoint) {
+            return await MonitoredEndpointModel.update(monitoredEndpoint.toObject(), {
+                where: { id: id },
+            })
+        }
+
+        throw new Error(`There is no monitored endpoint with id: ${id} for this User`)
     }
 
-    delete(id: Number): Boolean {
-        return false
+    async delete(id: number, uID: number): Promise<boolean> {
+        const endpoint = await MonitoredEndpointModel.findOne({
+            where: { id: id, owner: uID },
+        })
+        if (!endpoint) {
+            throw new Error('This User doesnt have access to this endpoint')
+        }
+        console.log(endpoint.dataValues)
+
+        // delete all referenced monitoring results
+        const results = await MonitoringResultModel.findAll({
+            where: { monitoredEndpoint: id },
+        })
+        results.forEach(async (result: any) => {
+            await MonitoringResultModel.destroy({
+                where: {
+                    id: result.id,
+                },
+            })
+        })
+
+        // delete referencing monitored enpoint
+        if (endpoint.dataValues) {
+            const deleted = await MonitoredEndpointModel.destroy({
+                where: {
+                    id: id,
+                    owner: uID,
+                },
+            })
+            return deleted
+        }
+
+        throw new Error(`There is no monitored endpoint with id: ${id} for this User`)
     }
 }
