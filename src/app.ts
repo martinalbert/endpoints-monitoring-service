@@ -4,7 +4,7 @@ import routes from './routes'
 
 const server = restify.createServer()
 
-// Middlewares
+// Middlewares & plugins
 server.use(restify.plugins.bodyParser())
 server.use(morgan('dev'))
 
