@@ -8,4 +8,5 @@ export default {
     MYSQL_DB: process.env.MYSQL_DB || 'database',
     MYSQL_USER: process.env.MYSQL_USER || 'root',
     MYSQL_PW: process.env.MYSQL_PW || 'root',
+    JWT_SECRET: process.env.JWT_SECRET || 'secret123',
 }
