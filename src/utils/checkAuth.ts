@@ -3,12 +3,19 @@ import errors from 'restify-errors'
 import jwt from 'jsonwebtoken'
 import config from '../config'
 
+interface jwtObject {
+    id: number
+    email: string
+    iat: number
+    exp: number
+}
+
 export default (req: Request, res: Response, next: Next) => {
-    let decoded
+    let decoded: jwtObject
 
     try {
         const token = req.header('authorization').split(' ')[1]
-        decoded = <any>jwt.verify(token, config.JWT_SECRET)
+        decoded = <jwtObject>jwt.verify(token, config.JWT_SECRET)
 
         const { id, email } = decoded
         req.user = { id, email }
