@@ -7,16 +7,11 @@ import config from '../../../config'
 // Password	root
 // Socket	/Applications/MAMP/tmp/mysql/mysql.sock
 
-export const sequelize = new Sequelize(
-    config.MYSQL_DB,
-    config.MYSQL_USER,
-    config.MYSQL_PW,
-    {
-        host: config.MYSQL_URL,
-        port: config.MYSQL_PORT,
-        dialect: 'mysql',
-    }
-)
+export const sequelize = new Sequelize(config.MYSQL_DB, config.MYSQL_USER, config.MYSQL_PW, {
+    host: config.MYSQL_URL,
+    port: config.MYSQL_PORT,
+    dialect: 'mysql',
+})
 
 export const connect = () => {
     sequelize
@@ -27,5 +22,7 @@ export const connect = () => {
         .catch((err: Error) => {
             console.error('Unable to connect to the database:', err)
         })
-    sequelize.sync({ force: true })
+
+    // drop all tables
+    // sequelize.sync({ force: true })
 }
