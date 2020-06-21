@@ -1,9 +1,9 @@
 import {
+    GetMonitoredEndpointByIDController,
     GetAllMonitoredEndpointsController,
     CreateMonitoredEndpointController,
     UpdateMonitoredEndpointController,
     DeleteMonitoredEndpointController,
-    GetMonitoredEndpointByIDController,
 } from '../controllers/MonitoredEndpointControllers'
 import { MonitoredEndpointRepo, UserRepo } from '../daos'
 
@@ -21,7 +21,8 @@ export const createMonitoredEndpoint = new CreateMonitoredEndpointController(
     userRepo
 )
 export const updateMonitoredEndpoint = new UpdateMonitoredEndpointController(
-    monitoredEndpointRepo
+    monitoredEndpointRepo,
+    userRepo
 )
 export const deleteMonitoredEndpoint = new DeleteMonitoredEndpointController(
     monitoredEndpointRepo

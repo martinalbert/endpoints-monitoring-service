@@ -1,7 +1,4 @@
-import {
-    UserRegisterController,
-    UserLoginController,
-} from '../controllers/UserController'
+import { UserRegisterController, UserLoginController } from '../controllers/UserController'
 import { UserRepo } from '../daos'
 
 const userRepo = new UserRepo()
