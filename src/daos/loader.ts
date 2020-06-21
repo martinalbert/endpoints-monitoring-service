@@ -7,17 +7,7 @@ import config from '../config'
  */
 const loadRepo = (daoName: string) => {
     const currentDatabase = config.CURRENT_DATABASE
-    return require(`./repos/${currentDatabase}/${daoName}_${currentDatabase}_repo`)
-        .default
-}
-
-/**
- * Load an abstraction(interface) of a specified repo.
- * @param {string} abstraction - String of specified interface
- * @returns {module} Built in require function that returns some module - in this case interface
- */
-const loadInterface = (abstraction: string) => {
-    return require(`./repos/I${abstraction}Repo`).default
+    return require(`./repos/${currentDatabase}/${daoName}_${currentDatabase}_repo`).default
 }
 
 const loadClient = () => {
@@ -27,6 +17,5 @@ const loadClient = () => {
 
 export default {
     loadRepo,
-    loadInterface,
     loadClient,
 }
