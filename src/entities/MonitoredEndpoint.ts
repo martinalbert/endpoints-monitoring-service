@@ -1,31 +1,32 @@
 import User from './User'
 
 interface IMonitoredEndpoint {
-    id: Number
+    id: number
     name: string
     url: string
     dateOfCreation: Date
     dateOfLastCheck: Date
-    monitoredInterval: Number
+    monitoredInterval: number
     owner: User
+    toObject(): Object
 }
 
 export default class MonitoredEndpoint implements IMonitoredEndpoint {
-    id: Number
+    id: number
     name: string
     url: string
     dateOfCreation: Date
     dateOfLastCheck: Date
-    monitoredInterval: Number
+    monitoredInterval: number
     owner: User
 
     constructor(
-        id: Number,
+        id: number,
         name: string,
         url: string,
         dateOfCreation: Date,
         dateOfLastCheck: Date,
-        monitoredInterval: Number,
+        monitoredInterval: number,
         owner: User
     ) {
         this.id = id
@@ -35,5 +36,16 @@ export default class MonitoredEndpoint implements IMonitoredEndpoint {
         this.dateOfLastCheck = dateOfLastCheck
         this.monitoredInterval = monitoredInterval
         this.owner = owner
+    }
+
+    toObject(): Object {
+        return {
+            name: this.name,
+            url: this.url,
+            dateOfCreation: this.dateOfCreation,
+            dateOfLastCheck: this.dateOfLastCheck,
+            monitoredInterval: this.monitoredInterval,
+            owner: this.owner.id,
+        }
     }
 }

@@ -1,25 +1,26 @@
 import MonitoredEndpoint from './MonitoredEndpoint'
 
 interface IMonitoringResult {
-    id: Number
+    id: number
     dateOfCheck: Date
     returnedPayload: string
-    returnedHTTPStatusCode: Number
+    returnedHTTPStatusCode: number
     monitoredEndpoint: MonitoredEndpoint
+    toObject(): Object
 }
 
 export default class MonitoringResult implements IMonitoringResult {
-    id: Number
+    id: number
     dateOfCheck: Date
     returnedPayload: string
-    returnedHTTPStatusCode: Number
+    returnedHTTPStatusCode: number
     monitoredEndpoint: MonitoredEndpoint
 
     constructor(
-        id: Number,
+        id: number,
         dateOfCheck: Date,
         returnedPayload: string,
-        returnedHTTPStatusCode: Number,
+        returnedHTTPStatusCode: number,
         monitoredEndpoint: MonitoredEndpoint
     ) {
         this.id = id
@@ -27,5 +28,15 @@ export default class MonitoringResult implements IMonitoringResult {
         this.returnedPayload = returnedPayload
         this.returnedHTTPStatusCode = returnedHTTPStatusCode
         this.monitoredEndpoint = monitoredEndpoint
+    }
+
+    toObject(): Object {
+        return {
+            id: this.id,
+            dateOfCheck: this.dateOfCheck,
+            returnedPayload: this.returnedPayload,
+            returnedHTTPStatusCode: this.returnedPayload,
+            monitoredEndpoint: this.monitoredEndpoint.id,
+        }
     }
 }
