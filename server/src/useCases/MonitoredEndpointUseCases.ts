@@ -5,7 +5,7 @@ import {
     UpdateMonitoredEndpointController,
     DeleteMonitoredEndpointController,
 } from '../controllers/MonitoredEndpointControllers'
-import { MonitoredEndpointRepo, UserRepo } from '../daos'
+import { MonitoredEndpointRepo, UserRepo } from '../db'
 
 const monitoredEndpointRepo = new MonitoredEndpointRepo()
 const userRepo = new UserRepo()

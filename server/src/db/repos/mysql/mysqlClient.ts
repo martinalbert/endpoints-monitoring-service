@@ -11,6 +11,11 @@ export const sequelize = new Sequelize(config.MYSQL_DB, config.MYSQL_USER, confi
     host: config.MYSQL_URL,
     port: config.MYSQL_PORT,
     dialect: 'mysql',
+    define: {
+        charset: 'utf8mb4',
+        collate: 'utf8mb4_unicode_ci',
+    },
+    logging: false,
 })
 
 export const connect = () => {

@@ -1,14 +1,7 @@
 import Sequelize, { Model } from 'sequelize'
 import { sequelize } from '../mysqlClient'
 
-class UserModel extends Model {
-    get userName(): string {
-        return this.userName
-    }
-    get accessToken(): string {
-        return this.accessToken
-    }
-}
+class UserModel extends Model {}
 UserModel.init(
     {
         id: {

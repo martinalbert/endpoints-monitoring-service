@@ -10,7 +10,6 @@ export default class MonitoringResultRepo extends IMonitoringResultRepo {
         const result = await MonitoringResultModel.findOne({
             where: { id: id, monitoredEndpoint: endpoint.id },
         })
-        console.log(result.dataValues)
 
         if (result) return result
 
@@ -40,7 +39,6 @@ export default class MonitoringResultRepo extends IMonitoringResultRepo {
 
     async create(monitoringResult: MonitoringResult): Promise<MonitoringResult> {
         const newResult = await MonitoringResultModel.create(monitoringResult.toObject())
-        console.log(newResult.dataValues)
 
         if (newResult) return newResult
 
@@ -51,7 +49,6 @@ export default class MonitoringResultRepo extends IMonitoringResultRepo {
         const result = await MonitoringResultModel.findOne({
             where: { id: id, monitoredEndpoint: endpoint.id },
         })
-        console.log(result.dataValues)
 
         if (result) {
             const deleted = await MonitoringResultModel.destroy({

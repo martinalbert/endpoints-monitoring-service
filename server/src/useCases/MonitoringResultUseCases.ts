@@ -4,7 +4,7 @@ import {
     CreateMonitoringResultController,
     DeleteMonitoringResultController,
 } from '../controllers/MonitoringResultControllers'
-import { MonitoringResultRepo, MonitoredEndpointRepo, UserRepo } from '../daos'
+import { MonitoringResultRepo, MonitoredEndpointRepo, UserRepo } from '../db'
 
 const monitoringResultRepo = new MonitoringResultRepo()
 const monitoredEndpointRepo = new MonitoredEndpointRepo()

@@ -12,7 +12,6 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
         if (!endpoint) {
             throw new Error('This User doesnt have access to this endpoint')
         }
-        console.log(endpoint.dataValues)
 
         if (endpoint) return endpoint
 
@@ -31,7 +30,6 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
 
     async create(monitoredEndpoint: MonitoredEndpoint): Promise<MonitoredEndpoint> {
         const newEndpoint = await MonitoredEndpointModel.create(monitoredEndpoint.toObject())
-        console.log(newEndpoint.dataValues)
 
         if (newEndpoint) return newEndpoint
 
@@ -59,7 +57,6 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
         if (!endpoint) {
             throw new Error('This User doesnt have access to this endpoint')
         }
-        console.log(endpoint.dataValues)
 
         // delete all referenced monitoring results
         const results = await MonitoringResultModel.findAll({

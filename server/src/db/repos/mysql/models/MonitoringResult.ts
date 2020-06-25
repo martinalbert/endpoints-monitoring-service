@@ -2,14 +2,8 @@ import Sequelize, { Model } from 'sequelize'
 import { sequelize } from '../mysqlClient'
 import MonitoredEndpointModel from './MonitoredEndpoint'
 
-class MonitoringResultModel extends Model {
-    get returnedPayload(): string {
-        return this.returnedPayload
-    }
-    get returnedHTTPStatusCode(): Number {
-        return this.returnedHTTPStatusCode
-    }
-}
+class MonitoringResultModel extends Model {}
+
 MonitoringResultModel.init(
     {
         id: {
@@ -27,7 +21,7 @@ MonitoringResultModel.init(
             },
         },
         returnedPayload: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT({ length: 'long' }),
             allowNull: false,
         },
         returnedHTTPStatusCode: {

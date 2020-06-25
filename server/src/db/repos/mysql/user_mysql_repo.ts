@@ -3,17 +3,8 @@ import User from '../../../entities/User'
 import UserModel from './models/User'
 
 export default class UserRepo extends IUserRepo {
-    async getByID(id: number): Promise<User> {
-        const user = await UserModel.findByPk(id)
-        console.log(user.dataValues)
-
-        if (user) return user
-
-        throw new Error(`There is no user with id: ${id}.`)
-    }
     async register(user: User): Promise<User> {
         const newUser = await UserModel.create(user.toObject())
-        console.log(newUser.dataValues)
 
         if (newUser) return newUser
 
@@ -41,7 +32,6 @@ export default class UserRepo extends IUserRepo {
 
     async getAll(): Promise<User[]> {
         const users = await UserModel.findAll()
-        console.log(users.dataValues)
 
         if (users) return users
 
