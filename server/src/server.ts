@@ -1,6 +1,6 @@
 import config from './config'
 import app from './app'
-import { connect } from './daos/'
+import { connect } from './db'
 
 const server = app
 
