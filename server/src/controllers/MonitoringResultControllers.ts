@@ -1,7 +1,7 @@
 import { BaseController } from './BaseController'
 import { Request, Response, Next } from 'restify'
-import IMonitoringResultRepo from '../daos/repos/IMonitoringResultRepo'
-import IMonitoredEndpointRepo from '../daos/repos/IMonitoredEndpointRepo'
+import IMonitoringResultRepo from '../db/repos/IMonitoringResultRepo'
+import IMonitoredEndpointRepo from '../db/repos/IMonitoredEndpointRepo'
 import MonitoringResult from '../entities/MonitoringResult'
 
 export class GetMonitoringResultByIDController extends BaseController {
@@ -89,13 +89,13 @@ export class CreateMonitoringResultController extends BaseController {
             const monitoringResult = new MonitoringResult(
                 0,
                 dateOfCheck,
-                httpCode,
                 httpPayload,
+                Number(httpCode),
                 monitoredEndpoint
             )
 
             // save record
-            console.log('creating new monitored endpoint')
+            console.log('creating new MonitoringResult')
             const newResult = await this.repo.create(monitoringResult)
 
             this.created(res)

@@ -1,7 +1,7 @@
 import { Request, Response, Next } from 'restify'
 import { BaseController } from './BaseController'
-import IMonitoredEndpointRepo from '../daos/repos/IMonitoredEndpointRepo'
-import IUserRepo from '../daos/repos/IUserRepo'
+import IMonitoredEndpointRepo from '../db/repos/IMonitoredEndpointRepo'
+import IUserRepo from '../db/repos/IUserRepo'
 import MonitoredEndpoint from '../entities/MonitoredEndpoint'
 
 export class GetMonitoredEndpointByIDController extends BaseController {
@@ -19,7 +19,6 @@ export class GetMonitoredEndpointByIDController extends BaseController {
             const endpoint = await this.repo.getByID(req.params.id, req.user.id)
 
             this.ok<MonitoredEndpoint>(res, endpoint)
-            next()
         } catch (err) {
             return this.resourceNotFound(next, err)
         }
@@ -83,7 +82,7 @@ export class CreateMonitoredEndpointController extends BaseController {
             )
 
             // save record
-            console.log('creating new monitored endpoint')
+            console.log('creating new MonitoredEndpoint')
             const newEndpoint = await this.repo.create(monitoredEndpoint)
 
             this.created(res)
@@ -114,12 +113,15 @@ export class UpdateMonitoredEndpointController extends BaseController {
             const { id, email } = req.user
             const user = await this.userRepo.getCurrent(id, email)
 
-            // create an ID, create dateOfCreation, create dateOfLastCheck
-            const dateOfCreation = new Date()
-            const dateOfLastCheck = new Date()
-            const { name, url, monitoredInterval } = req.body
+            // get last record of endpoint
+            const oldEndpoint = await this.repo.getByID(req.params.id, id)
+
+            // create dateOfCreation, create dateOfLastCheck
+            const { name, url, monitoredInterval, lastCheck } = req.body
+            const dateOfCreation = oldEndpoint.dateOfCreation
+            const dateOfLastCheck = new Date(lastCheck)
             const monitoredEndpoint = new MonitoredEndpoint(
-                0, // wrong
+                0,
                 name,
                 url,
                 dateOfCreation,
