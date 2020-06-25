@@ -2,7 +2,7 @@ import { Request, Response, Next } from 'restify'
 import jwt from 'jsonwebtoken'
 import config from '../config'
 import { BaseController } from './BaseController'
-import IUserRepo from '../daos/repos/IUserRepo'
+import IUserRepo from '../db/repos/IUserRepo'
 import User from '../entities/User'
 
 export class UserRegisterController extends BaseController {
@@ -16,7 +16,6 @@ export class UserRegisterController extends BaseController {
     protected async executeImpl(req: Request, res: Response, next: Next): Promise<void | any> {
         try {
             // handle request
-            // implement bCrypt
             console.log('registering user')
             const { userName, email, pw } = req.body
             const user = new User(0, userName, email, pw)
@@ -51,6 +50,28 @@ export class UserLoginController extends BaseController {
             })
 
             this.ok<string>(res, token)
+            next()
+        } catch (err) {
+            return this.fail(next, err)
+        }
+    }
+}
+
+export class GetAllUsersController extends BaseController {
+    private repo: IUserRepo
+
+    constructor(userRepo: IUserRepo) {
+        super()
+        this.repo = userRepo
+    }
+
+    protected async executeImpl(req: Request, res: Response, next: Next): Promise<void | any> {
+        try {
+            // handle request
+            console.log('getting all users')
+            const users = await this.repo.getAll()
+
+            this.ok<User[]>(res, users)
             next()
         } catch (err) {
             return this.fail(next, err)
