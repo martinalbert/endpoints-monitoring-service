@@ -1,5 +1,5 @@
 import { Server } from 'restify'
-import { registerUser, loginUser } from '../useCases/UserUseCases'
+import { registerUser, loginUser, getAllUsersController } from '../useCases/UserUseCases'
 import checkAuth from '../utils/checkAuth'
 import {
     getMonitoredEndpointByID,
@@ -16,6 +16,10 @@ import {
 } from '../useCases/MonitoringResultUseCases'
 
 export default (server: Server) => {
+    server.get('/users', checkAuth, async (req, res, next) =>
+        getAllUsersController.exec(req, res, next)
+    )
+
     server.post('/user/login', async (req, res, next) => loginUser.exec(req, res, next))
     server.post('/user/register', async (req, res, next) => registerUser.exec(req, res, next))
 
