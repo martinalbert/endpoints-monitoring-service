@@ -13,6 +13,16 @@ interface jwtObject {
 export default (req: Request, res: Response, next: Next) => {
     let decoded: jwtObject
 
+    if (req.url === '/users') {
+        try {
+            const token = req.header('authorization').split(' ')[1]
+            decoded = <jwtObject>jwt.verify(token, config.JWT_SECRET)
+            next()
+        } catch (error) {
+            return next(new errors.UnauthorizedError('You have no access'))
+        }
+    }
+
     try {
         const token = req.header('authorization').split(' ')[1]
         decoded = <jwtObject>jwt.verify(token, config.JWT_SECRET)
