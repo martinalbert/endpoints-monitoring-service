@@ -48,7 +48,6 @@ const testEndpoint2 = new MonitoredEndpoint(
 let user1: User, user2: User
 
 beforeAll(async () => {
-    jest.setTimeout(80000)
     connect()
     // testing users
     user1 = await userRepo.register(owner1)

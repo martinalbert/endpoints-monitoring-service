@@ -8,7 +8,6 @@ const testKeyPrefix = `test:${testSuiteName}`
 const repo = new UserRepo()
 
 beforeAll(async () => {
-    jest.setTimeout(80000)
     connect()
 })
 

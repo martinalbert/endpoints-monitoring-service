@@ -53,7 +53,6 @@ const testEndpoint2 = new MonitoredEndpoint(
 let user1: User, user2: User
 
 beforeAll(async () => {
-    jest.setTimeout(80000)
     // seed in Users
     await userRepo.register(owner1)
     await userRepo.register(owner2)

@@ -25,10 +25,6 @@ const user2 = new User(
     'dcb20f8a-5657-4f1b-9f7f-ce65739b359e'
 )
 
-beforeAll(() => {
-    jest.setTimeout(80000)
-})
-
 afterEach(async () => {
     const users = await repo.getAll()
     for (const user of users) {

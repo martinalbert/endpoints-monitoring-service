@@ -23,7 +23,6 @@ const owner2 = new User(
 )
 
 beforeAll(async () => {
-    jest.setTimeout(80000)
     connect()
     await userRepo.register(owner1)
     await userRepo.register(owner2)
