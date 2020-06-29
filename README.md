@@ -2,7 +2,7 @@
 
 ## Installation
 
-If you dont't have mySQL installed on your macOS machine, you can install it with homebrew - package manager or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
+If you don't have mySQL installed on your macOS machine, you can install it with homebrew - package manager or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
 
 ```bash
 brew install mysql
