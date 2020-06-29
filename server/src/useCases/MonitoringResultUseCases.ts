@@ -6,22 +6,64 @@ import {
 } from '../controllers/MonitoringResultControllers'
 import { MonitoringResultRepo, MonitoredEndpointRepo, UserRepo } from '../db'
 
+/**
+ * Instance of Repository Class\
+ * Class that handles communication with database
+ *
+ * @class MonitoringResultRepo
+ * @instance
+ */
 const monitoringResultRepo = new MonitoringResultRepo()
+/**
+ * Instance of Repository Class\
+ * Class that handles communication with database
+ *
+ * @class MonitoredEndpointRepo
+ * @instance
+ */
 const monitoredEndpointRepo = new MonitoredEndpointRepo()
 
-export const getMonitoringResultByID = new GetMonitoringResultByIDController(
+/**
+ * Instance of Controller Class\
+ * Controller that handles HTTP Requests with method GET on endpoint /endpoints/:eID/results/:id
+ *
+ * @class GetMonitoringResultByIDController
+ * @instance
+ */
+export const getResultByID = new GetMonitoringResultByIDController(
     monitoringResultRepo,
     monitoredEndpointRepo
 )
-export const getAllMonitoringResults = new GetAllMonitoringResultsController(
+/**
+ * Instance of Controller Class\
+ * Controller that handles HTTP Requests with method GET on endpoint /endpoints/:eID/results
+ *
+ * @class GetAllMonitoringResultsController
+ * @instance
+ */
+export const getAllResults = new GetAllMonitoringResultsController(
     monitoringResultRepo,
     monitoredEndpointRepo
 )
-export const createMonitoringResult = new CreateMonitoringResultController(
+/**
+ * Instance of Controller Class\
+ * Controller that handles HTTP Requests with method POST on endpoint /endpoints/:eID/results
+ *
+ * @class CreateMonitoringResultController
+ * @instance
+ */
+export const createResult = new CreateMonitoringResultController(
     monitoringResultRepo,
     monitoredEndpointRepo
 )
-export const deleteMonitoringResult = new DeleteMonitoringResultController(
+/**
+ * Instance of Controller Class\
+ * Controller that handles HTTP Requests with method DEL on endpoint /endpoints/:eID/results/:id
+ *
+ * @class DeleteMonitoringResultController
+ * @instance
+ */
+export const deleteResult = new DeleteMonitoringResultController(
     monitoringResultRepo,
     monitoredEndpointRepo
 )
