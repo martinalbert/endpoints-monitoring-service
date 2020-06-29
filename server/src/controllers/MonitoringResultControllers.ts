@@ -183,7 +183,9 @@ export class CreateMonitoringResultController extends BaseController {
             )
 
             // save record
-            console.log('creating new MonitoringResult')
+            console.log(
+                `creating new MonitoringResult: ${monitoredEndpoint.url} | ${httpCode}`
+            )
             const newResult = await this.repo.create(monitoringResult)
 
             this.created<MonitoringResult>(res, newResult)
