@@ -3,43 +3,36 @@ import errors from 'restify-errors'
 import jwt from 'jsonwebtoken'
 import config from '../config'
 
-interface jwtObject {
-    id: number
-    email: string
-    iat: number
-    exp: number
-}
-
-export default (req: Request, res: Response, next: Next) => {
+/**
+ * Middleware Utility \
+ * Function that authenticate User by decoding the token inside Authorization Header.
+ * It serves as middleware to web frameworks.\
+ *
+ * @function checkAuth
+ * @param  {Request} req - incoming HTTP Request
+ * @param  {Response} res - HTTP Response
+ * @param  {Next} next - Callback function
+ */
+const checkAuth = (req: Request, res: Response, next: Next) => {
     let decoded: jwtObject
-
-    if (req.url === '/users') {
-        try {
-            const token = req.header('authorization').split(' ')[1]
-            decoded = <jwtObject>jwt.verify(token, config.JWT_SECRET)
-            next()
-        } catch (error) {
-            return next(new errors.UnauthorizedError('You have no access'))
-        }
-    }
-
     try {
         const token = req.header('authorization').split(' ')[1]
         decoded = <jwtObject>jwt.verify(token, config.JWT_SECRET)
-
-        const { id, email } = decoded
-        req.user = { id, email }
     } catch (error) {
         return next(new errors.UnauthorizedError('You have no access'))
     }
 
-    // token expires in 15min, get new token an every request
-    // const { id, email } = decoded
-    // const token = jwt.sign({ uid: { id, email } }, config.JWT_SECRET, {
-    //     expiresIn: '15m',
-    //     algorithm: 'HS256',
-    // })
-    // res.setHeader('Authorization', token)
+    if (req.url === '/users') {
+        const { user } = <any>decoded
+        if (user !== 'root') return next(new errors.UnauthorizedError('You have no access'))
+        next()
+    } else {
+        const { id, email } = decoded
+        if (!id || !email) return next(new errors.UnauthorizedError('You have no access'))
 
-    next()
+        req.user = { id, email }
+        next()
+    }
 }
+
+export default checkAuth
