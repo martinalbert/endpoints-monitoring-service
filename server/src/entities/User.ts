@@ -1,5 +1,4 @@
 /**
- *
  * Entity Class\
  * class that represent entity of user across application
  *
@@ -24,6 +23,12 @@ export default class User implements IUser {
         this.accessToken = accessToken
     }
 
+    /**
+     * Helper Function \
+     * function that maps the user to object
+     * @function toObject
+     * @returns {Object} object with properties of user
+     */
     toObject(): Object {
         return {
             id: this.id,
