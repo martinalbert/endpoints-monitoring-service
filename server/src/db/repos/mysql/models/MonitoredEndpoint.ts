@@ -2,6 +2,14 @@ import Sequelize, { Model } from 'sequelize'
 import { sequelize } from '../mysqlClient'
 import UserModel from './User'
 
+/**
+ * Sequelize Model Class\
+ * Entity: Monitored Endpoint\
+ * Represent table in database
+ *
+ * @class MonitoredEndpointModel
+ * @extends Model
+ */
 class MonitoredEndpointModel extends Model {}
 MonitoredEndpointModel.init(
     {
@@ -40,6 +48,10 @@ MonitoredEndpointModel.init(
         monitoredInterval: {
             type: Sequelize.INTEGER,
             allowNull: false,
+            validate: {
+                min: 5,
+                isInt: true,
+            },
         },
         owner: {
             type: Sequelize.INTEGER,

@@ -1,6 +1,14 @@
 import Sequelize, { Model } from 'sequelize'
 import { sequelize } from '../mysqlClient'
 
+/**
+ * Sequelize Model Class\
+ * Entity: User\
+ * Represent table in database
+ *
+ * @class UserModel
+ * @extends Model
+ */
 class UserModel extends Model {}
 UserModel.init(
     {
@@ -13,7 +21,10 @@ UserModel.init(
         },
         userName: {
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: true,
+            validate: {
+                len: [3, 50],
+            },
         },
         email: {
             type: Sequelize.STRING,
@@ -25,6 +36,9 @@ UserModel.init(
         accessToken: {
             type: Sequelize.STRING,
             allowNull: false,
+            validate: {
+                len: [10, 150],
+            },
         },
     },
     {
