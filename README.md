@@ -5,7 +5,7 @@
 If you dont't have mySQL installed on your macOS machine, you can install it with homebrew - package manager or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
 
 ```bash
-brew install mysql@5.7
+brew install mysql
 ```
 
 After installation, you have to launch the mySQL server. You can do this via **macOS Preference Panel** or via **CLI**:
