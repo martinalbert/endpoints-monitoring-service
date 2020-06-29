@@ -9,5 +9,5 @@ export default {
     MYSQL_USER: process.env.MYSQL_USER || 'root',
     MYSQL_PW: process.env.MYSQL_PW || 'root',
     JWT_SECRET: process.env.JWT_SECRET || 'secret123',
-    MYSQL_SOCKET: process.env.MYSQL_SOCKET || '/Applications/MAMP/tmp/mysql/mysql.sock',
+    MYSQL_SOCKET: process.env.MYSQL_SOCKET,
 }
