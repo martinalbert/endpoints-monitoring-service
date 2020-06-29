@@ -2,7 +2,24 @@
 
 ## Installation
 
-Clone the repository, navigate to the cloned directory and run:
+If you dont't have mySQL installed on your macOS machine, you can install it with homebrew - package manager or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
+
+```bash
+brew install mysql@5.7
+```
+
+After installation, you have to launch the mySQL server. You can do this via **macOS Preference Panel** or via **CLI**:
+
+```bash
+sudo /usr/local/mysql/support-files/mysql.server start
+sudo /usr/local/mysql/support-files/mysql.server stop
+sudo /usr/local/mysql/support-files/mysql.server restart
+```
+
+Make sure you start your mySQL server and set the [enviroment variable](#Enviroment-variables) inside config.\
+By default mySQL server is running on port 3306, socket locatioon is `/tmp/mysql.sock`.
+
+When the database is running successfully, clone the repository, navigate to the cloned directory and run:
 
 ```bash
 docker-compose up
