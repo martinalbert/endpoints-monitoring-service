@@ -2,7 +2,7 @@
 
 ## Installation
 
-If you don't have mySQL installed on your macOS machine, you can install it with homebrew - package manager or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
+If you don't have mySQL installed on your macOS machine, you can install it with **homebrew** (package manager) or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
 
 ```bash
 brew install mysql
@@ -17,15 +17,9 @@ sudo /usr/local/mysql/support-files/mysql.server restart
 ```
 
 Make sure you start your mySQL server and set the [enviroment variable](#Enviroment-variables) inside config.\
-By default mySQL server is running on port 3306, socket locatioon is `/tmp/mysql.sock`.
+By default mySQL server is running on port `3306`, socket locatioon is `/tmp/mysql.sock`.
 
 When the database is running successfully, clone the repository, navigate to the cloned directory and run:
-
-```bash
-docker-compose up
-```
-
-or without docker:
 
 ```bash
 cd ./server
@@ -42,6 +36,12 @@ npm run build
 npm start
 ```
 
+Or with **docker**, navigate to root directory of cloned repo and run:
+
+```bash
+docker-compose up
+```
+
 ## Usage
 
 After docker container will successfully run or node package manager will successfully install and start server and monitoring service.
@@ -52,7 +52,7 @@ All routes except `/user/login` and `/user/register` are protected with middlewa
 Token can be obtained by POST Request to `/user/login`.\
 Successfully logged user can access only endpoints that he owns and last 10 results that belong to his endpoints.
 
-### How to use rest-api `./server` :
+### How to use rest-api `./server`
 
 If you want to test only functionality of rest-api in docker navigate to the root directory, where `docker-compose.yml` file resides and run this command:
 
@@ -64,11 +64,11 @@ This will run just `mysql` and `server` service from `docker-compose.yml` file i
 
 #### Available logins:
 
-email: `batman@example.com`\
-pw: `dcb20f8a-5657-4f1b-9f7f-ce65739b359e`
+**email:** `batman@example.com`\
+**pw:** `dcb20f8a-5657-4f1b-9f7f-ce65739b359e`
 
-email: `info@applifting.cz`\
-pw: `93f39e2f-80de-4033-99ee-249d92736a25`
+**email:** `info@applifting.cz`\
+**pw:** `93f39e2f-80de-4033-99ee-249d92736a25`
 
 #### Available requests:
 
@@ -115,13 +115,12 @@ Or can be used in conjunction with identifiers to retrieve the metadata for that
 
 #### Other routes:
 
-| route            | description                                                             |
-| :--------------- | :---------------------------------------------------------------------- |
-| `/user/login`    | returns JWT token in which are encrypted ID and email of the User.      |
-| `/user/register` | creates new record of User                                              |
-|                  | served as a helper route during development - bCrypt is not implemented |
+| route            | description                                                                                          |
+| :--------------- | :--------------------------------------------------------------------------------------------------- |
+| `/user/login`    | returns JWT token in which are encrypted ID and email of the User.                                   |
+| `/user/register` | creates new record of User (served as a helper route during development - bCrypt is not implemented) |
 
-### How to use monitoring service `./service` :
+### How to use monitoring service `./service`
 
 In this case, we require all three services to be running in docker.
 
