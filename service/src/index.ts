@@ -102,7 +102,10 @@ const process = async () => {
  */
 const main = async () => {
     await prepareUsers()
-        .then(() => console.log('users are ready'))
+        .then(() => {
+            if (users.length === 0) throw Error('No Users found')
+            console.log('users are ready')
+        })
         .catch(error => {
             throw Error(error.stack)
         })
@@ -111,7 +114,7 @@ const main = async () => {
         throw Error(error.stack)
     })
 
-    setInterval(process, MINUTES_15)
+    setInterval(process, MINUTE)
 }
 
 /**
