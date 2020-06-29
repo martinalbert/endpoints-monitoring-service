@@ -85,7 +85,7 @@ const callback = (endpoint: MonitoredEndpoint, token: string) => {
 }
 
 /**
- * Function that is monitoring endpoint specified in parameters for time peried specified in monitored endpoint.\
+ * Function that is monitoring endpoint specified in parameters for time peried interval specified in monitored endpoint.\
  * This time period is defined in seconds.
  *
  * @function monitorUrl

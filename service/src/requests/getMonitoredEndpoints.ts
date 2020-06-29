@@ -49,6 +49,7 @@ const toArrayOfMonitoredEndpoints = (endpoints: Array<any>): MonitoredEndpoint[]
 
     return result
 }
+
 /**
  * AXIOS Request \
  * Asynchronous function that set up axios request's options and sends request based on them.
