@@ -4,7 +4,7 @@ export default {
     PORT: process.env.PORT || 3000,
     CURRENT_DATABASE: process.env.CURRENT_DATABASE || 'mysql',
     MYSQL_URL: process.env.MYSQL_URL || 'localhost',
-    MYSQL_PORT: Number(process.env.MYSQL_PORT) || 8889,
+    MYSQL_PORT: Number(process.env.MYSQL_PORT) || 3306,
     MYSQL_DB: process.env.MYSQL_DB || 'database',
     MYSQL_USER: process.env.MYSQL_USER || 'root',
     MYSQL_PW: process.env.MYSQL_PW || 'root',
