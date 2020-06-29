@@ -35,7 +35,7 @@ All routes except `/user/login` and `/user/register` are protected with middlewa
 Token can be obtained by POST Request to `/user/login`.\
 Successfully logged user can access only endpoints that he owns and last 10 results that belong to his endpoints.
 
-### How to use rest-api (`./server`) :
+### How to use rest-api `./server` :
 
 If you want to test only functionality of rest-api in docker navigate to the root directory, where `docker-compose.yml` file resides and run this command:
 
@@ -104,7 +104,7 @@ Or can be used in conjunction with identifiers to retrieve the metadata for that
 | `/user/register` | creates new record of User                                              |
 |                  | served as a helper route during development - bCrypt is not implemented |
 
-### How to use monitoring service (`./service`) :
+### How to use monitoring service `./service` :
 
 In this case, we require all three services to be running in docker.
 
