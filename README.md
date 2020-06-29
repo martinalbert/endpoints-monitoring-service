@@ -72,7 +72,7 @@ This will run just `mysql` and `server` service from `docker-compose.yml` file i
 
 #### Available requests:
 
-`GET`, `POST`, `PUT`, `DEL`
+`GET`, `POST`, `PUT`, `DELETE`
 
 #### Available routes:
 
