@@ -45,7 +45,7 @@ services:
             context: ./service
             dockerfile: DockerFile
         volumes:
-            - ./service:/usr/src/app/simulation
+            - ./service:/usr/src/app/service
         environment:
             - CURRENT_DATABASE=mysql
             - RESTAPI_URL=http://rest-api:3000
