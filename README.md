@@ -16,8 +16,8 @@ sudo /usr/local/mysql/support-files/mysql.server stop
 sudo /usr/local/mysql/support-files/mysql.server restart
 ```
 
-Make sure you start your mySQL server and set the [enviroment variable](#Enviroment-variables) inside config.\
-By default mySQL server is running on port `3306`, socket locatioon is `/tmp/mysql.sock`.
+Make sure you start your mySQL server and set the [enviroment variables](#Enviroment-variables) inside config.\
+By default mySQL server is running on port `3306`, socket location is `/tmp/mysql.sock`.
 
 When the database is running successfully, clone the repository, navigate to the cloned directory and run:
 
@@ -36,7 +36,7 @@ npm run build
 npm start
 ```
 
-Or with **docker**, navigate to root directory of cloned repo and run:
+Or with **docker**, navigate to the root directory of cloned repo and run:
 
 ```bash
 docker-compose up
@@ -122,7 +122,7 @@ Or can be used in conjunction with identifiers to retrieve the metadata for that
 
 ### How to use monitoring service `./service`
 
-In this case, we require all three services to be running in docker.
+In this case, monitoring service require all three services to be running in docker.
 
 Service is running in background and checking every minute for new or updated endpoints. You can change the time of checking for new enpoints in `./service/index.ts` and change `@constant MINUTE` to specific value or to `@constant MINUTES_15` which represent 15 minutes.
 
