@@ -7,13 +7,13 @@
 Navigate to the root directory of cloned repo and run:
 
 ```bash
-> docker-compose up
+docker-compose up
 ```
 
 or to launch rest-api with database only
 
 ```bash
-bashdocker-compose up mysql server
+docker-compose up mysql server
 ```
 
 ### MySQL
