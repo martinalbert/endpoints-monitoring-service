@@ -2,6 +2,22 @@
 
 ## Installation
 
+### Docker
+
+Navigate to the root directory of cloned repo and run:
+
+```bash
+> docker-compose up
+```
+
+or to launch rest-api with database only
+
+```bash
+bashdocker-compose up mysql server
+```
+
+### MySQL
+
 If you don't have mySQL installed on your macOS machine, you can install it with **homebrew** (package manager) or with [native package](https://dev.mysql.com/doc/mysql-osx-excerpt/5.7/en/osx-installation-pkg.html)
 
 ```bash
@@ -19,27 +35,28 @@ sudo /usr/local/mysql/support-files/mysql.server restart
 Make sure you start your mySQL server and set the [enviroment variables](#Enviroment-variables) inside config.\
 By default mySQL server is running on port `3306`, socket location is `/tmp/mysql.sock`.
 
-When the database is running successfully, clone the repository, navigate to the cloned directory and run:
+### Server and Service
+
+When the database is running successfully, clone the repository, navigate to the cloned
+directory and run:
 
 ```bash
+# This launches `rest-api`.
+
 cd ./server
 npm install
 npm run build
 npm start
 ```
 
-This launches `rest-api`. Now navigate to `service` directory and run:
+Now navigate to `service` directory and run:
 
 ```bash
+# This launches `microservice`.
+
 npm install
 npm run build
 npm start
-```
-
-Or with **docker**, navigate to the root directory of cloned repo and run:
-
-```bash
-docker-compose up
 ```
 
 ## Usage
@@ -80,6 +97,8 @@ This will run just `mysql` and `server` service from `docker-compose.yml` file i
 `/endpoints`\
 `/endpoints/:eID/results`
 
+### [Postman Collection export](postman_collection.json)
+
 These can be used alone like this:
 
 | route                     | description                                                         |
@@ -94,6 +113,32 @@ Or can be used in conjunction with identifiers to retrieve the metadata for that
 | :---------------------------- | :-------------------------------------------------------------- |
 | `/endpoints/:ID`              | returns an Endpoint represented by specified ID                 |
 | `/endpoints/:eID/results/:ID` | returns a Result represented by specified ID and ID of Endpoint |
+
+##### Request example:
+
+```json
+{
+    "url": "http://localhost:3000/endpoints",
+    "method": "POST",
+    "header": [
+        {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+        },
+        {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzNzY3NzUsImV4cCI6MTU5MzM3NzY3NX0.DC0jSEALen_y9BIOSOzQkuvqNig-v4F8Axm_7yqgVik",
+            "type": "text"
+        }
+    ],
+    "body": {
+        "name": "batman",
+        "url": "https://www.dccomics.com/characters/batman",
+        "monitoredInterval": 5
+    }
+}
+```
 
 ##### Response example:
 
@@ -119,6 +164,34 @@ Or can be used in conjunction with identifiers to retrieve the metadata for that
 | :--------------- | :--------------------------------------------------------------------------------------------------- |
 | `/user/login`    | returns JWT token in which are encrypted ID and email of the User.                                   |
 | `/user/register` | creates new record of User (served as a helper route during development - bCrypt is not implemented) |
+
+##### Request example:
+
+```json
+{
+    "url": "http://localhost:3000/user/login",
+    "method": "POST",
+    "header": [
+        {
+            "key": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+        }
+    ],
+    "body": {
+        "email": "batman@example.com",
+        "password": "dcb20f8a-5657-4f1b-9f7f-ce65739b359e"
+    }
+}
+```
+
+##### Response example:
+
+```json
+{
+    "dto": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzOTEzMDAsImV4cCI6MTU5MzM5MjIwMH0.CX-5nO6OXChIh4c69dPFNxd-JBlcr5KbHnr1dgO0u6s"
+}
+```
 
 ### How to use monitoring service `./service`
 

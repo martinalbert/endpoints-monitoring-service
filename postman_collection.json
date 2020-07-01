@@ -1,0 +1,347 @@
+{
+    "info": {
+        "_postman_id": "a87a5138-f9d7-4453-b023-7c608fb2b14e",
+        "name": "Endpoints Monitoring Service",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "User",
+            "item": [
+                {
+                    "name": "register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"userName\": \"Applifting\",\n    \"email\": \"info@applifting.cz\",\n    \"pw\": \"93f39e2f-80de-4033-99ee-249d92736a25\"\n}"
+                        },
+                        "url": {
+                            "raw": "localhost:3000/user/register",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["user", "register"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"batman@example.com\",\n    \"pw\": \"dcb20f8a-5657-4f1b-9f7f-ce65739b359e\"\n}\n"
+                        },
+                        "url": {
+                            "raw": "localhost:3000/user/login",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["user", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "getAll",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzOTEzMDAsImV4cCI6MTU5MzM5MjIwMH0.CX-5nO6OXChIh4c69dPFNxd-JBlcr5KbHnr1dgO0u6s",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:3000/users",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "Monitored Endpoints",
+            "item": [
+                {
+                    "name": "getAll",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzOTEzMDAsImV4cCI6MTU5MzM5MjIwMH0.CX-5nO6OXChIh4c69dPFNxd-JBlcr5KbHnr1dgO0u6s",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzNzY3NzUsImV4cCI6MTU5MzM3NzY3NX0.DC0jSEALen_y9BIOSOzQkuvqNig-v4F8Axm_7yqgVik",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"black mask\",\n    \"url\": \"https://www.dccomics.com/characters/black-mask\",\n    \"monitoredInterval\": 5\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "getByID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzODYzNDcsImV4cCI6MTU5MzM4NzI0N30.lzgwhzhm-TmoKDpiEzCSTcVLURQvI4YEJ4quPdwp5mo",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/3",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "3"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzNDM1MDIsImV4cCI6MTU5MzM0NDQwMn0.3PcqPQmE8Nb_T6v6dqj2aF--Zc6vYTroHRSnOdUvsSs",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"medium-better-programming\",\n    \"url\": \"test\",\n    \"monitoredInterval\": 120,\n    \"lastCheck\": \"2020-06-24T20:59:54.817Z\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/6",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "6"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwZXRlckBwZXRlci5jb20iLCJpYXQiOjE1OTI3NDg1NzAsImV4cCI6MTU5Mjc0OTQ3MH0.XhJyc3tKYnFzEDvst4qNgrsRNInr6q9CCtLGGMfekls",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/7",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "7"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        },
+        {
+            "name": "Monitoring Results",
+            "item": [
+                {
+                    "name": "getAll",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzODc3OTQsImV4cCI6MTU5MzM4ODY5NH0.j1e5CCZl95fApWTtLazRB82vzKzFOQqKkwDsk_6cNIs",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/3/results",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "3", "results"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "create",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "type": "text",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJiYXRtYW5AZXhhbXBsZS5jb20iLCJpYXQiOjE1OTMzNjUxNjAsImV4cCI6MTU5MzM2NjA2MH0.LnICSMqX1Gm3ZLLbcQUMvISlO-dK8sDVu0rL4ALxl7g"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"httpCode\": 200,\n    \"httpPayload\": \"Works!\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/7/results",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "7", "results"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "getByID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwZXRlckBwZXRlci5jb20iLCJpYXQiOjE1OTI3NDc2NTgsImV4cCI6MTU5Mjc0ODU1OH0.6XDRw9DzQ4mz8zm0isBT19oqQ5XC-_pYeRpj_HpnL8M",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/7/results/4",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "7", "results", "4"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwZXRlckBwZXRlci5jb20iLCJpYXQiOjE1OTI3NDc2NTgsImV4cCI6MTU5Mjc0ODU1OH0.6XDRw9DzQ4mz8zm0isBT19oqQ5XC-_pYeRpj_HpnL8M",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/endpoints/7/results/4",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["endpoints", "7", "results", "4"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        }
+    ],
+    "protocolProfileBehavior": {}
+}
