@@ -10,27 +10,6 @@ const endpointRepo = new MonitoredEndpointRepo()
 const users = data.users
 const endpoints = data.endpoints
 
-// /**
-//  * Helper Function\
-//  * Function that counts records of users and endpoints.
-//  *
-//  * @async @function numberOfRecords
-//  * @return {Object} object with user count and endpoint count
-//  */
-// const numberOfRecords = async () => {
-//     const users = await userRepo.getAll()
-//     const userCount = users.length
-//     let endpointCount = 0
-//     for (const user of users) {
-//         const endpoints = await endpointRepo.getAll(user.id)
-//         endpointCount += endpoints.length
-//     }
-//     return {
-//         userCount,
-//         endpointCount,
-//     }
-// }
-
 const seedUsers = async (): Promise<void> => {
     for (const user of users) await userRepo.register(user)
 }
