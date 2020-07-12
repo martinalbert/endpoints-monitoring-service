@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize'
 import config from '../config'
+const MYSQL_PORT = Number(config.MYSQL_PORT)
 
 /**
  * Instance of Sequelize\
@@ -9,7 +10,7 @@ import config from '../config'
  */
 const sequelize = new Sequelize(config.MYSQL_DB, config.MYSQL_USER, config.MYSQL_PW, {
     host: config.MYSQL_URL,
-    port: config.MYSQL_PORT,
+    port: MYSQL_PORT,
     dialect: 'mysql',
 
     define: {
