@@ -1,8 +1,8 @@
 import config from './config'
 import app from './app'
-import { connect } from './db'
+import connect from './db/connect'
 import seed from './db/repos/mysql/seed'
-import clearDB from './db/repos/mysql/clearDB'
+import { clearDB } from './db/repos/mysql/actions'
 
 /**
  * Restify Server\
@@ -15,9 +15,10 @@ server.listen(config.PORT, () => {
 
     // connect to DB (mySQL)
     connect()
-
-    // seed sample data
-    seed()
+        .then(() => {
+            // seed sample data
+            return seed()
+        })
         .then(() => console.log('data have been seeded'))
         .catch(err => {
             throw Error(err)
