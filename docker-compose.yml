@@ -9,7 +9,9 @@ services:
             MYSQL_DATABASE: database
             MYSQL_USER: root
             MYSQL_PASSWORD: root
-        command: --character-set-server=utf8mb4
+        command: mysqld --init-file="/tmp/database/init.sql"
+        volumes:
+            - ./docker/data:/tmp/database
         ports:
             - '3306:3306'
         restart: always
@@ -21,7 +23,7 @@ services:
             context: ./server
             dockerfile: DockerFile
         volumes:
-            - ./server:/usr/src/app/server
+            - /usr/src/app/server/node_modules/
         ports:
             - 3000:3000
         environment:
@@ -44,12 +46,11 @@ services:
         build:
             context: ./service
             dockerfile: DockerFile
-        volumes:
-            - ./service:/usr/src/app/service
         environment:
             - CURRENT_DATABASE=mysql
             - RESTAPI_URL=http://rest-api:3000
             - PORT=3000
             - JWT_SECRET=x23f_
         depends_on:
+            - mysql
             - server
