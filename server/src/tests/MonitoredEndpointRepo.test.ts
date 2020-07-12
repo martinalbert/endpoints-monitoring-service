@@ -1,4 +1,4 @@
-import { connect, dropAllTables } from '../db'
+import connect from '../db/connect'
 import User from '../entities/User'
 import MonitoredEndpoint from '../entities/MonitoredEndpoint'
 import MonitoredEndpointRepo from '../db/repos/mysql/monitoredEndpoint_mysql_repo'
@@ -23,7 +23,7 @@ const owner2 = new User(
 )
 
 beforeAll(async () => {
-    connect()
+    await connect()
     await userRepo.register(owner1)
     await userRepo.register(owner2)
 })

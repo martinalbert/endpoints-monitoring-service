@@ -1,4 +1,4 @@
-import { connect } from '../db'
+import connect from '../db/connect'
 
 import MonitoredEndpointRepo from '../db/repos/mysql/monitoredEndpoint_mysql_repo'
 import MonitoringRepo from '../db/repos/mysql/monitoringResult_mysql_repo'
@@ -48,7 +48,7 @@ const testEndpoint2 = new MonitoredEndpoint(
 let user1: User, user2: User
 
 beforeAll(async () => {
-    connect()
+    await connect()
     // testing users
     user1 = await userRepo.register(owner1)
     user2 = await userRepo.register(owner2)

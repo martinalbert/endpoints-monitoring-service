@@ -1,5 +1,5 @@
 import Sequelize, { Model } from 'sequelize'
-import { sequelize } from '../mysqlClient'
+import sequelize from '../../../sequelize'
 
 /**
  * Sequelize Model Class\

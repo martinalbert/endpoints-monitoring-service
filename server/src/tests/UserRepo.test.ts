@@ -1,4 +1,4 @@
-import { connect } from '../db'
+import connect from '../db/connect'
 import User from '../entities/User'
 import UserRepo from '../db/repos/mysql/user_mysql_repo'
 
@@ -8,7 +8,7 @@ const testKeyPrefix = `test:${testSuiteName}`
 const repo = new UserRepo()
 
 beforeAll(async () => {
-    connect()
+    await connect()
 })
 
 afterEach(async () => {

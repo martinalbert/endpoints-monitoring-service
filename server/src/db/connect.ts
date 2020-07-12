@@ -7,6 +7,8 @@ import sequelize from './sequelize'
 const connect = async () => {
     try {
         // synchronize database
+        await sequelize.sync()
+        // authenticate database connection
         await sequelize.authenticate()
         console.log('Connection has been established successfully.')
     } catch (err) {
