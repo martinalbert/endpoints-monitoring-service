@@ -1,4 +1,6 @@
 import data from '../../sampleData'
+import sequelize from '../../sequelize'
+import { getLastID } from './actions'
 import MonitoredEndpointRepo from './monitoredEndpoint_mysql_repo'
 import UserRepo from './user_mysql_repo'
 
@@ -8,25 +10,33 @@ const endpointRepo = new MonitoredEndpointRepo()
 const users = data.users
 const endpoints = data.endpoints
 
-/**
- * Helper Function\
- * Function that counts records of users and endpoints.
- *
- * @async @function numberOfRecords
- * @return {Object} object with user count and endpoint count
- */
-const numberOfRecords = async () => {
-    const users = await userRepo.getAll()
-    const userCount = users.length
-    let endpointCount = 0
-    for (const user of users) {
-        const endpoints = await endpointRepo.getAll(user.id)
-        endpointCount += endpoints.length
-    }
-    return {
-        userCount,
-        endpointCount,
-    }
+// /**
+//  * Helper Function\
+//  * Function that counts records of users and endpoints.
+//  *
+//  * @async @function numberOfRecords
+//  * @return {Object} object with user count and endpoint count
+//  */
+// const numberOfRecords = async () => {
+//     const users = await userRepo.getAll()
+//     const userCount = users.length
+//     let endpointCount = 0
+//     for (const user of users) {
+//         const endpoints = await endpointRepo.getAll(user.id)
+//         endpointCount += endpoints.length
+//     }
+//     return {
+//         userCount,
+//         endpointCount,
+//     }
+// }
+
+const seedUsers = async (): Promise<void> => {
+    for (const user of users) await userRepo.register(user)
+}
+
+const seedEndpoints = async (): Promise<void> => {
+    for (const endpoint of endpoints) await endpointRepo.create(endpoint)
 }
 
 /**
@@ -36,15 +46,14 @@ const numberOfRecords = async () => {
  * @returns {Promise<void>} promise
  */
 const seed = async (): Promise<void> => {
-    const { userCount, endpointCount } = await numberOfRecords()
-
     try {
+        const { userCount, endpointCount } = await getLastID()
+
         // seed users
-        if (userCount < users.length) for (const user of users) await userRepo.register(user)
+        if (userCount < users.length) await seedUsers()
 
         // seed endpoints to monitor
-        if (endpointCount < endpoints.length)
-            for (const endpoint of endpoints) await endpointRepo.create(endpoint)
+        if (endpointCount < endpoints.length) await seedEndpoints()
     } catch (error) {
         throw Error(error)
     }
