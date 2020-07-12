@@ -21,7 +21,7 @@ services:
             context: ./server
             dockerfile: DockerFile
         volumes:
-            - ./server:/usr/src/app/server
+            - /usr/src/app/server/node_modules/
         ports:
             - 3000:3000
         environment:
@@ -44,8 +44,6 @@ services:
         build:
             context: ./service
             dockerfile: DockerFile
-        volumes:
-            - ./service:/usr/src/app/service
         environment:
             - CURRENT_DATABASE=mysql
             - RESTAPI_URL=http://rest-api:3000
