@@ -1,4 +1,5 @@
 import IUserRepo from '../IUserRepo'
+import { getLastID } from './actions'
 import User from '../../../entities/User'
 import UserModel from './models/User'
 
@@ -23,6 +24,9 @@ export default class UserRepo extends IUserRepo {
      * @returns {Promise<User>} created User
      */
     async register(user: User): Promise<User> {
+        const { userCount } = await getLastID()
+        user.id = userCount + 1
+
         const newUser = await UserModel.create(user.toObject())
 
         if (newUser) return newUser

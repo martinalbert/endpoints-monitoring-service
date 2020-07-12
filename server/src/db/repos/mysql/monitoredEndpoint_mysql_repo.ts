@@ -1,4 +1,5 @@
 import IMonitoredEndpointRepo from '../IMonitoredEndpointRepo'
+import { getLastID } from './actions'
 import MonitoredEndpointModel from './models/MonitoredEndpoint'
 import MonitoringResultModel from './models/MonitoringResult'
 import MonitoredEndpoint from '../../../entities/MonitoredEndpoint'
@@ -60,6 +61,9 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
      * @returns {Promise<MonitoredEndpoint>} created Monitored Endpoint
      */
     async create(monitoredEndpoint: MonitoredEndpoint): Promise<MonitoredEndpoint> {
+        const { endpointCount } = await getLastID()
+        monitoredEndpoint.id = endpointCount + 1
+
         const newEndpoint = await MonitoredEndpointModel.create(monitoredEndpoint.toObject())
 
         if (newEndpoint) return newEndpoint
