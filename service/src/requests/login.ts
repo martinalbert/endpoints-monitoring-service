@@ -40,7 +40,7 @@ export default async (user: User): Promise<string | any> => {
     try {
         token = await axios(options)
     } catch (error) {
-        throw new Error('Getting all endpoints failed.')
+        throw new Error('Log In failed.')
     }
 
     return token.data.dto
