@@ -23,7 +23,7 @@ const checkAuth = (req: Request, res: Response, next: Next) => {
     }
 
     if (req.url === '/users') {
-        const { user } = <any>decoded
+        const { user } = decoded
         if (user !== 'root') return next(new errors.UnauthorizedError('You have no access'))
         next()
     } else {
