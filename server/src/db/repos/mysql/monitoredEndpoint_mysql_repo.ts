@@ -22,12 +22,12 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
      * Function that finds one endpoint represented by its its ID
      * @async @function getByID
      * @param {number} id - ID of Endpoint
-     * @param {number} uID - ID of User
+     * @param {number} userID - ID of User
      * @returns {Promise<MonitoredEndpoint>} found Monitored Endpoint
      */
-    async getByID(id: number, uID: number): Promise<MonitoredEndpoint> {
+    async getByID(id: number, userID: number): Promise<MonitoredEndpoint> {
         const endpoint = await MonitoredEndpointModel.findOne({
-            where: { id: id, owner: uID },
+            where: { id: id, owner: userID },
         })
         if (!endpoint) {
             throw new Error('This User doesnt have access to this endpoint')
@@ -41,12 +41,12 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
     /**
      * Function that finds all endpoints corresponding to its owner
      * @async @function getAll
-     * @param {number} uID - ID of User
+     * @param {number} userID - ID of User
      * @returns {Promise<MonitoredEndpoint[]>} found Monitored Endpoints
      */
-    async getAll(uID: number): Promise<MonitoredEndpoint[]> {
+    async getAll(userID: number): Promise<MonitoredEndpoint[]> {
         const endpoints = await MonitoredEndpointModel.findAll({
-            where: { owner: uID },
+            where: { owner: userID },
         })
 
         if (endpoints) return endpoints
@@ -96,12 +96,12 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
      * Function that deletes endpoint represented by its ID
      * @async @function delete
      * @param {number} id - ID of Endpoint
-     * @param {number} uID - ID of User
+     * @param {number} userID - ID of User
      * @returns {Promise<boolean>} value that indicates whether endpoint was deleted or not
      */
-    async delete(id: number, uID: number): Promise<boolean> {
+    async delete(id: number, userID: number): Promise<boolean> {
         const endpoint = await MonitoredEndpointModel.findOne({
-            where: { id: id, owner: uID },
+            where: { id: id, owner: userID },
         })
         if (!endpoint) {
             throw new Error('This User doesnt have access to this endpoint')
@@ -125,7 +125,7 @@ export default class MonitoredEndpointRepo extends IMonitoredEndpointRepo {
             const deleted = await MonitoredEndpointModel.destroy({
                 where: {
                     id: id,
-                    owner: uID,
+                    owner: userID,
                 },
                 restartIdentity: true,
             })
