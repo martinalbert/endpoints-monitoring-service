@@ -72,9 +72,16 @@ interface IUser {
      * Helper Function \
      * function that maps the user to bbject
      * @function toObject
-     * @returns {Object} object with properties of user
+     * @returns {UserObject} object with properties of user
      */
-    toObject(): Object
+    toObject(): UserObject
+}
+
+interface UserObject {
+    id: number
+    userName?: string
+    email: string
+    accessToken: string
 }
 
 /**
@@ -114,9 +121,17 @@ interface IMonitoringResult {
      * Helper Function \
      * function that maps the monitoring result to bbject
      * @function toObject
-     * @returns {Object} object with properties of result
+     * @returns {MonitoringResultObject} object with properties of result
      */
-    toObject(): Object
+    toObject(): MonitoringResultObject
+}
+
+interface MonitoringResultObject {
+    id: number
+    dateOfCheck: Date
+    returnedPayload: string
+    returnedHTTPStatusCode: number
+    monitoredEndpoint: MonitoredEndpoint
 }
 
 /**
@@ -166,7 +181,16 @@ interface IMonitoredEndpoint {
      * Helper Function \
      * function that maps the monitored endpoint to bbject
      * @function toObject
-     * @returns {Object} object with properties of endpoint
+     * @returns {MonitoredEndpointObject} object with properties of endpoint
      */
-    toObject(): Object
+    toObject(): MonitoredEndpointObject
+}
+
+interface MonitoredEndpointObject {
+    name: string
+    url: string
+    dateOfCreation: Date
+    dateOfLastCheck: Date
+    monitoredInterval: number
+    owner: User
 }
