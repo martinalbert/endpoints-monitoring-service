@@ -46,9 +46,9 @@ export default class MonitoredEndpoint implements IMonitoredEndpoint {
      * Helper Function \
      * function that maps the monitored endpoint to object
      * @function toObject
-     * @returns {Object} object with properties of endpoint
+     * @returns {MonitoredEndpointObject} object with properties of endpoint
      */
-    toObject(): Object {
+    toObject(): MonitoredEndpointObject {
         return {
             id: this.id,
             name: this.name,
@@ -64,9 +64,9 @@ export default class MonitoredEndpoint implements IMonitoredEndpoint {
      * Helper Function \
      * function that maps the monitored endpoint to object without ID
      * @function toObject
-     * @returns {Object} object with properties of endpoint
+     * @returns {MonitoredEndpointObject} object with properties of endpoint
      */
-    toObjectWithoutID(): Object {
+    toObjectWithoutID(): MonitoredEndpointObject {
         return {
             name: this.name,
             url: this.url,

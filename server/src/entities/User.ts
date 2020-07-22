@@ -27,9 +27,9 @@ export default class User implements IUser {
      * Helper Function \
      * function that maps the user to object
      * @function toObject
-     * @returns {Object} object with properties of user
+     * @returns {UserObject} object with properties of user
      */
-    toObject(): Object {
+    toObject(): UserObject {
         return {
             id: this.id,
             userName: this.userName,

@@ -54,12 +54,12 @@ const toMonitoredEndpoint = (updatedEndpoint: any): MonitoredEndpoint => {
  * @async
  * @param  {MonitoredEndpoint} updatedEndpoint - endpoint that will be updated
  * @param  {string} token - token of user that contains this endpoint
- * @returns {Promise<MonitoredEndpoint | any>} updated endpoint
+ * @returns {Promise<MonitoredEndpoint>} updated endpoint
  */
 export default async (
     updatedEndpoint: MonitoredEndpoint,
     token: string
-): Promise<MonitoredEndpoint | any> => {
+): Promise<MonitoredEndpoint> => {
     // setting up request
     options.headers.Authorization = `Bearer ${token}`
     options.url = `/endpoints/${updatedEndpoint.id}`

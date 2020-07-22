@@ -23,7 +23,7 @@ export const getUsers = async () => await users()
  * @async
  * @function login
  * @param  {User} user - user that is going to be loged in
- * @returns {Promise<string | any>} token
+ * @returns {Promise<string>} token
  */
 export const login = async (user: User) => await loginUser(user)
 
@@ -44,7 +44,7 @@ export const getEndpoints = async (token: string) => await getMonitoredEndpoints
  * @function updateEndpoint
  * @param  {MonitoredEndpoint} updatedEndpoint - endpoint that will be updated
  * @param  {string} token - token of user that contains this endpoint
- * @returns {Promise<MonitoredEndpoint | any>} updated endpoint
+ * @returns {Promise<MonitoredEndpoint} updated endpoint
  */
 export const updateEndpoint = async (newEndpoint: MonitoredEndpoint, token: string) =>
     await updateMonitoredEndpoint(newEndpoint, token)

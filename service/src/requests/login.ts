@@ -30,9 +30,9 @@ const options: AxiosRequestConfig = {
  * Asynchronous function that set up axios request's options and sends request based on them.
  * @async
  * @param  {User} user - user that is going to be loged in
- * @returns {Promise<string | any>} token
+ * @returns {Promise<string>} token
  */
-export default async (user: User): Promise<string | any> => {
+export default async (user: User): Promise<string> => {
     options.data.email = user.email
     options.data.pw = user.accessToken
 

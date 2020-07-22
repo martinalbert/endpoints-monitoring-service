@@ -41,7 +41,7 @@ export default async (
     endpoint: MonitoredEndpoint,
     result: MonitoringResult,
     token: string
-): Promise<MonitoringResult | any> => {
+): Promise<MonitoringResult | AxiosResponse> => {
     // setting up request
     options.headers.Authorization = `Bearer ${token}`
     options.url = `/endpoints/${endpoint.id}/results`

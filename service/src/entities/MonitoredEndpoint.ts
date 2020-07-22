@@ -46,9 +46,9 @@ export default class MonitoredEndpoint implements IMonitoredEndpoint {
      * Helper Function \
      * function that maps the monitored endpoint to bbject
      * @function toObject
-     * @returns {Object} object with properties of endpoint
+     * @returns {MonitoredEndpointObject} object with properties of endpoint
      */
-    toObject(): Object {
+    toObject(): MonitoredEndpointObject {
         return {
             name: this.name,
             url: this.url,

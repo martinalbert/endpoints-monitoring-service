@@ -26,10 +26,10 @@ const options: AxiosRequestConfig = {
  * Helper Funtion \
  * Maps the received users from request to Entities of User
  * @function toArrayOfUsers
- * @param  {Array<any>} users - users from request
+ * @param  {any[]} users - users from request
  * @returns {User[]} mapped users
  */
-const toArrayOfUsers = (users: Array<any>): User[] => {
+const toArrayOfUsers = (users: any[]): User[] => {
     let result: User[] = Array()
 
     if (users.length > 0)
@@ -46,7 +46,7 @@ const toArrayOfUsers = (users: Array<any>): User[] => {
  * @async
  * @returns {Promise<User|any>} returned users
  */
-export default async (): Promise<User[] | any> => {
+export default async (): Promise<User[]> => {
     let token: string
     try {
         const payload = { user: 'root' }

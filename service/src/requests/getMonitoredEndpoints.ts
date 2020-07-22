@@ -26,10 +26,10 @@ const options: AxiosRequestConfig = {
  * Helper Funtion \
  * Maps the received endpoints from request to Entities of Monitored Endpoint
  * @function toArrayOfMonitoredEndpoints
- * @param  {Array<any>} endpoints - endpoints from request
+ * @param  {any[]} endpoints - endpoints from request
  * @returns {MonitoredEndpoint[]} mapped monitored endpoints
  */
-const toArrayOfMonitoredEndpoints = (endpoints: Array<any>): MonitoredEndpoint[] => {
+const toArrayOfMonitoredEndpoints = (endpoints: MonitoredEndpoint[]): MonitoredEndpoint[] => {
     let result: MonitoredEndpoint[] = Array()
 
     if (endpoints.length > 0)
@@ -55,9 +55,9 @@ const toArrayOfMonitoredEndpoints = (endpoints: Array<any>): MonitoredEndpoint[]
  * Asynchronous function that set up axios request's options and sends request based on them.
  * @async
  * @param  {string} token - token of user that contains this endpoint
- * @returns {Promise<MonitoredEndpoint[]|any>} returned endpoint
+ * @returns {Promise<MonitoredEndpoint[]>} returned endpoint
  */
-export default async (token: string): Promise<MonitoredEndpoint[] | any> => {
+export default async (token: string): Promise<MonitoredEndpoint[]> => {
     options.headers.Authorization = `Bearer ${token}`
 
     let endpoints: AxiosResponse

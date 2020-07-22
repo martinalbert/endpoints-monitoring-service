@@ -38,9 +38,9 @@ export default class MonitoringResult implements IMonitoringResult {
      * Helper Function \
      * function that maps the monitoring result to object
      * @function toObject
-     * @returns {Object} object with properties of result
+     * @returns {MonitoringResultObject} object with properties of result
      */
-    toObject(): Object {
+    toObject(): MonitoringResultObject {
         return {
             id: this.id,
             dateOfCheck: this.dateOfCheck,
@@ -54,9 +54,9 @@ export default class MonitoringResult implements IMonitoringResult {
      * Helper Function \
      * function that maps the monitoring result to object without ID
      * @function toObject
-     * @returns {Object} object with properties of result
+     * @returns {MonitoringResultObject} object with properties of result
      */
-    toObjectWithoutID(): Object {
+    toObjectWithoutID(): MonitoringResultObject {
         return {
             dateOfCheck: this.dateOfCheck,
             returnedPayload: this.returnedPayload,

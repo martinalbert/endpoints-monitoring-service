@@ -38,14 +38,14 @@ export default class MonitoringResult implements IMonitoringResult {
      * Helper Function \
      * function that maps the monitoring result to bbject
      * @function toObject
-     * @returns {Object} object with properties of result
+     * @returns {MonitoringResultObject} object with properties of result
      */
-    toObject(): Object {
+    toObject(): MonitoringResultObject {
         return {
             id: this.id,
             dateOfCheck: this.dateOfCheck,
             returnedPayload: this.returnedPayload,
-            returnedHTTPStatusCode: this.returnedPayload,
+            returnedHTTPStatusCode: this.returnedHTTPStatusCode,
             monitoredEndpoint: this.monitoredEndpoint.id,
         }
     }
