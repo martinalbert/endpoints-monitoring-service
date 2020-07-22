@@ -44,7 +44,7 @@ export default class MonitoredEndpoint implements IMonitoredEndpoint {
 
     /**
      * Helper Function \
-     * function that maps the monitored endpoint to bbject
+     * function that maps the monitored endpoint to object
      * @function toObject
      * @returns {MonitoredEndpointObject} object with properties of endpoint
      */

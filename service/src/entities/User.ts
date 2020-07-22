@@ -26,7 +26,7 @@ export default class User implements IUser {
 
     /**
      * Helper Function \
-     * function that maps the user to bbject
+     * function that maps the user to object
      * @function toObject
      * @returns {UserObject} object with properties of user
      */

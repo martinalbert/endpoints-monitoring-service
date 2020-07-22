@@ -29,7 +29,7 @@ interface IUser {
 
     /**
      * Helper Function \
-     * function that maps the user to bbject
+     * function that maps the user to object
      * @function toObject
      * @returns {UserObject} object with properties of user
      */
@@ -78,7 +78,7 @@ interface IMonitoringResult {
     monitoredEndpoint: MonitoredEndpoint
     /**
      * Helper Function \
-     * function that maps the monitoring result to bbject
+     * function that maps the monitoring result to object
      * @function toObject
      * @returns {MonitoringResultObject} object with properties of result
      */
@@ -138,7 +138,7 @@ interface IMonitoredEndpoint {
     owner: User
     /**
      * Helper Function \
-     * function that maps the monitored endpoint to bbject
+     * function that maps the monitored endpoint to object
      * @function toObject
      * @returns {MonitoredEndpointObject} object with properties of endpoint
      */

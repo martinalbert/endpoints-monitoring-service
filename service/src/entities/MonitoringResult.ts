@@ -36,7 +36,7 @@ export default class MonitoringResult implements IMonitoringResult {
 
     /**
      * Helper Function \
-     * function that maps the monitoring result to bbject
+     * function that maps the monitoring result to object
      * @function toObject
      * @returns {MonitoringResultObject} object with properties of result
      */
